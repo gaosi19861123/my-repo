@@ -8,9 +8,17 @@ on:
         type: string
         required: true
         default: 'World'
-
+      log_level:
+        description: 'Enter your log level'
+        type: choice
+        options:
+          - debug
+          - info
+          - warning
+        default: 'info'
 jobs:
   manual:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello, ${{ inputs.greeting }}!"
+      - run: echo "Log level: ${{ inputs.log_level }}"
