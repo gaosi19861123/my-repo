@@ -7,6 +7,7 @@ jobs:                             # ジョブの定義
     runs-on: ubuntu-latest
     env:
       USERNAME: ${{ vars.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     steps:                        # ステップの定義
       - name: Checkout
         uses: actions/checkout@v4 # アクションの呼び出し
@@ -14,3 +15,7 @@ jobs:                             # ジョブの定義
         run: echo "Hello, world"  # シェルコマンドの実行
       - name: print
         run: echo "username:${USERNAME}"
+      - name: print password with mask
+        run: echo "password:${PASSWORD}"
+      - name: print password without mask
+        run: echo "password:${PASSWORD:0:1} ${PASSWORD#?}"
