@@ -1,0 +1,12 @@
+name:Hello World  # 工作流名称
+
+on:push
+      
+jobs:
+  build: #JOBID
+    runs-on: ubuntu-latest #runner 执行环境
+    steps:
+      - run: echo "Hello, World!"
+      - uses: actions/checkout@v3 #Action Github 提供的Action
+        with:
+          ref: main
