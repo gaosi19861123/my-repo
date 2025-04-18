@@ -4,5 +4,9 @@ jobs:                             # ジョブの定義
   hello:                          # ジョブID
     runs-on: ubuntu-latest        # ランナー（Ubuntuで実行）
     steps:                        # ステップの定義
-      - run: echo "Hello, world"  # シェルコマンドの実行
-      - uses: actions/checkout@v4 # アクションの呼び出し
+      - name: Checkout
+        uses: actions/checkout@v4 # アクションの呼び出し
+      - name: Hello
+        run: echo "Hello, world"  # シェルコマンドの実行
+      - name: print username
+        run: echo "username: ${{ vars.USERNAME }}"
