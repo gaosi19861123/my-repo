@@ -1,5 +1,5 @@
 name: Hello                       # ワークフロー名
-run-name: Run by ${github.actor}   # 実行名
+run-name: Run by ${{github.actor}}   # 実行名
 on: 
   push:                          # イベント（プッシュ時に起動）
 
@@ -36,15 +36,6 @@ jobs:                             # ジョブの定義
           CONTAINS_FUNC: ${{ contains('Hello, world', 'world') }}
           ENDSWITH_FUNC: ${{ endswith('Hello, world', 'world') }}
           STARTSWITH_FUNC: ${{ startswith('Hello, world', 'Hello') }}
-          INDEXOF_FUNC: ${{ indexof('Hello, world', 'world') }}
-          JOIN_FUNC: ${{ join(',', 'Hello, world') }} # 配列を文字列に変換
-          SPLIT_FUNC: ${{ split(',', 'Hello, world') }} # 文字列を配列に変換
-          TRIM_FUNC: ${{ trim(' Hello, world ') }} # 前後の空白を削除
-          LENGTH_FUNC: ${{ length('Hello, world') }} # 文字列の長さ
-          SUBSTRING_FUNC: ${{ substring('Hello, world', 1, 5) }} # 部分文字列
-          REPLACE_FUNC: ${{ replace('Hello, world', 'world', 'GitHub') }} # 文字列の置換
-          MD5_FUNC: ${{ md5('Hello, world') }} # 文字列のMD5ハッシュ
-          SHA256_FUNC: ${{ sha256('Hello, world') }} # 文字列のSHA256ハッシュ
       
   dump:
     runs-on: ubuntu-latest
