@@ -61,6 +61,7 @@ jobs:                             # ジョブの定義
     steps:
       - id: source
         run: echo "source" >> "$GITHUB_OUTPUT" # 出力をファイルに書き込む
-
-      - name: consume
-        run: echo "consum: ${{ steps.source.outputs.result }}"
+      - id: consume
+        run: echo "consum ${RESULT}
+        env:
+          RESULT: ${{ steps.source.outputs.result }}
