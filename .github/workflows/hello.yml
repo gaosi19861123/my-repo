@@ -55,3 +55,12 @@ jobs:                             # ジョブの定義
     steps:
       - name: skip-or-run
         run: echo "Hello, world"
+
+  share:
+    runs-on: ubuntu-latest
+    steps:
+      - id: source
+        run: echo "source" >> "$GITHUB_OUTPUT" # 出力をファイルに書き込む
+
+      - name: consume
+        run: echo "consum: ${{ steps.source.outputs.result }}"
