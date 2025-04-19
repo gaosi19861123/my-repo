@@ -41,7 +41,7 @@ jobs:                             # ジョブの定義
     runs-on: ubuntu-latest
     steps:
       - name: Json
-        run: echo "${{ CONTEXT }}" 
+        run: echo "${CONTEXT}" 
         env:
           CONTEXT: ${{ toJSON(github) }}
         
