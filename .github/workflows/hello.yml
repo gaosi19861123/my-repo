@@ -60,7 +60,7 @@ jobs:                             # ジョブの定義
     runs-on: ubuntu-latest
     steps:
       - id: source
-        run: echo "source" >> "$GITHUB_OUTPUT" # 出力をファイルに書き込む
+        run: echo "result=source" >> "$GITHUB_OUTPUT" # 出力をファイルに書き込む
       - id: consume
         run: echo "consum ${RESULT}"
         env:
