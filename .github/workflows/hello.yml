@@ -65,3 +65,14 @@ jobs:                             # ジョブの定義
         run: echo "consum ${RESULT}"
         env:
           RESULT: ${{ steps.source.outputs.result }}
+  
+  comment:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4 # リポジトリのチェックアウト
+      - run: gh pr comment ${GITHUB_HEAD_REF} --body "Hello, ${GITHUB_ACTOR}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #GitHub CLIの仕様です。つまり次のように環境変数を定義すれば、GitHub CLIは自動的にクレデンシャルを読み込んでくれます。 
