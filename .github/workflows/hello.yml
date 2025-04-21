@@ -1,7 +1,7 @@
 name: Hello                       # ワークフロー名
 run-name: Run by ${{github.actor}}   # 実行名
 on: 
-  push:                          # イベント（プッシュ時に起動）
+  [push, pull_request]                        # イベント（プッシュ時に起動）
 
 jobs:                             # ジョブの定義
   hello:                          # ジョブID
