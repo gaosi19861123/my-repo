@@ -20,22 +20,6 @@ jobs:                             # ジョブの定義
         run: echo "password:${PASSWORD}"
       - name: print password without mask
         run: echo "password:${PASSWORD:0:1} ${PASSWORD#?}"
-  
-      - name: print env
-        run: printenv | grep 'LITERAL_'
-        env: 
-          LITERAL_NULL: ${{ null }}
-          LITERAL_BOOLEAN: ${{ true }}
-          LITERAL_NUMBER: ${{ 123 }}
-          LITERAL_STRING: ${{ 'Hello,world' }}
-          LITERAL_OMIT_STRING: Hello
-
-      - name: _FUNC
-        run: printenv | grep '_FUNC'
-        env:
-          CONTAINS_FUNC: ${{ contains('Hello, world', 'world') }}
-          ENDSWITH_FUNC: ${{ endswith('Hello, world', 'world') }}
-          STARTSWITH_FUNC: ${{ startswith('Hello, world', 'Hello') }}
       
   dump:
     runs-on: ubuntu-latest
@@ -73,6 +57,6 @@ jobs:                             # ジョブの定義
       pull-requests: write
     steps:
       - uses: actions/checkout@v4 # リポジトリのチェックアウト
-      - run: gh pr comment ${GITHUB_HEAD_REF} --body "Hello, ${GITHUB_ACTOR}"
+      - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #GitHub CLIの仕様です。つまり次のように環境変数を定義すれば、GitHub CLIは自動的にクレデンシャルを読み込んでくれます。 
