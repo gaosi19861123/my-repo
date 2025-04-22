@@ -12,10 +12,18 @@ concurrency:
 
 jobs:
     lint:
+        env:
+            NAME: ${{ github.actor }}
         runs-on: ubuntu-latest
         timeout-minutes: 5
         steps:
+            - shell: bash
+              run: echo "Hello, world"
             - uses: actions/checkout@v4
             - run: docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest
+            - shell: python
+              run: |
+                import os
+                print(os.environ['NAME'])
+
     
-      
