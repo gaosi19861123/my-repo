@@ -1,0 +1,21 @@
+name: Bash tracing
+on: push
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |   # Bashのトレーシングオプションを有効化し、実行したコマンドをログ出力
+          set -x
+          date
+          hostname
+      
+      - run: |
+          echo “::group::Show environment variables”
+          printenv
+          echo "::endgroup::"
+
+      - run: |
+          echo "::group::Show current directory"
+          pwd
+          echo "::endgroup::"
+          
