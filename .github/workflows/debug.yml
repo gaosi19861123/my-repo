@@ -10,7 +10,7 @@ jobs:
           hostname
       
       - run: |
-          echo “::group::Show environment variables”
+          echo "::group::Show environment variables"
           printenv
           echo "::endgroup::"
 
