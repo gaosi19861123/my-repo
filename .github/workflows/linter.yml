@@ -28,9 +28,11 @@ jobs:
               run: |
                 import os
                 print(os.environ['NAME'])
+                print(os.getcwd())
             - name: Check test.py with pylint
               run: |
                 if [ -f "test.py" ]; then
+                    set -x
                     python -m pip install pylint
                     python -m pylint test.py || echo "Pylint found issues, check the output above"
                 else
