@@ -1,8 +1,10 @@
 name: Bash tracing
 on: push
+
 jobs:
   log:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - run: |   # Bashのトレーシングオプションを有効化し、実行したコマンドをログ出力
           set -x
@@ -19,4 +21,38 @@ jobs:
           echo "::group::Show current directory"
           pwd
           echo "::endgroup::"
-          
+
+  multi-os:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        version: [18, 20]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+      - run: |
+          echo "${RUNNER_OS}" && node --version
+
+  multi-os-define:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            version: 18
+          - os: ubuntu-latest
+            version: 20
+          - os: windows-latest
+            version: 18
+          - os: windows-latest
+            version: 20
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+      - run: |
+          echo "${RUNNER_OS}" && node --version

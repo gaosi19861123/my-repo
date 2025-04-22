@@ -39,5 +39,26 @@ jobs:
                     echo "test.py not found"
                     exit 1
                 fi
-
     
+    # JOB依存関係を記述
+    first-job:
+        runs-on: ubuntu-latest
+        needs: [lint]
+        steps:
+            - run: echo "lint job is done"
+            - id: first_job
+              run: echo "result=Hello, world" >> "${GITHUB_OUTPUT}"
+        outputs:
+            result: ${{ steps.first_job.outputs.result }}
+    
+    #JOBのデータ共有
+    second-job:
+        runs-on: ubuntu-latest
+        needs: [first-job]
+        steps:
+            - env:
+                RESULT: ${{ needs.first-job.outputs.result }}
+              run: echo "${RESULT}"
+
+
+            
