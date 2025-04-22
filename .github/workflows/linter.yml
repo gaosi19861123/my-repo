@@ -18,12 +18,23 @@ jobs:
         timeout-minutes: 5
         steps:
             - shell: bash
-              run: echo "Hello, world"
+              run: |
+                set -x
+                set -e
+                echo "Hello, world"
             - uses: actions/checkout@v4
             - run: docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest
             - shell: python
               run: |
                 import os
                 print(os.environ['NAME'])
+            - name: Check test.py
+              run: |
+                if [ -f "test.py" ]; then
+                    docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest test.py
+                else
+                    echo "test.py not found"
+                    exit 1
+                fi
 
     
