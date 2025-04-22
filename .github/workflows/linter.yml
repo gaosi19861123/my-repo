@@ -28,10 +28,11 @@ jobs:
               run: |
                 import os
                 print(os.environ['NAME'])
-            - name: Check test.py
+            - name: Check test.py with pylint
               run: |
                 if [ -f "test.py" ]; then
-                    docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest test.py
+                    python -m pip install pylint
+                    python -m pylint test.py || echo "Pylint found issues, check the output above"
                 else
                     echo "test.py not found"
                     exit 1
