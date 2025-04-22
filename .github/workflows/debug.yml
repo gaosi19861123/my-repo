@@ -8,6 +8,7 @@ jobs:
           set -x
           date
           hostname
+          pwd
       
       - run: |
           echo "::group::Show environment variables"
