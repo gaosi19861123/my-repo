@@ -1,7 +1,0 @@
-#古いアクションを、自動バージョンアップできます。
-version: 2
-updates:
-    - package-ecosystem: github-actions
-      directory: "/"
-      schedule:
-        interval: daily
